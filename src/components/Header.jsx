@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import Suggestions from "./Suggestions";
 import { YOUTUBE_SUGGESTIONS_API } from "../constants";
 import { Link } from "react-router-dom";
+import { CgProfile } from "react-icons/cg";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -68,7 +69,9 @@ const Header = () => {
           />
         )}
       </div>
-      <div className="profile grow-[0.25]">Profile</div>
+      <div className="profile grow-[0.25] text-3xl font-bold">
+        <CgProfile />
+      </div>
     </div>
   );
 };

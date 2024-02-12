@@ -2,13 +2,18 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import { closeSideBar } from "../utils/sidebarSlice";
+import Comments from "./Comments";
+import { comments } from "../constants";
+
 const VideoWatch = () => {
   const [params] = useSearchParams();
+
   const dispatch = useDispatch();
-  console.log(params.get("v"));
+
   useEffect(() => {
     dispatch(closeSideBar());
   }, []);
+
   return (
     <div className="p-2 m-2">
       <iframe
@@ -21,6 +26,10 @@ const VideoWatch = () => {
         frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         allowfullscreen></iframe>
+      <div>
+        <h1 className="mt-4 font-bold text-2xl">Comments:</h1>
+        <Comments comments={comments} />
+      </div>
     </div>
   );
 };

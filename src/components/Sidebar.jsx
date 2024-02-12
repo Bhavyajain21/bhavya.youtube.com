@@ -1,6 +1,7 @@
 import { IoMdHome } from "react-icons/io";
 import { useSelector } from "react-redux";
 import store from "../utils/store";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   const show = useSelector((store) => store.sidebarToggle.isSideBarOpen);
@@ -9,10 +10,12 @@ const Sidebar = () => {
 
   return (
     <div className="sidebar divide-y divide-slate-700 w-[300px]">
-      <div className="home text-xl flex items-center p-2">
-        <IoMdHome />
-        <div className="text-lg ml-1">Home</div>
-      </div>
+      <Link to="/">
+        <div className="home text-xl flex items-center p-2">
+          <IoMdHome />
+          <div className="text-lg ml-1">Home</div>
+        </div>
+      </Link>
       <div className="subsriptions p-2">
         <div className="font-bold">Subscriptions</div>
         <ul className="cursor-pointer">
