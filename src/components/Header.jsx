@@ -1,12 +1,13 @@
 import { GiHamburgerMenu } from "react-icons/gi";
 import { CiSearch } from "react-icons/ci";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toggleSidebar } from "../utils/sidebarSlice";
 import { useEffect, useState } from "react";
 import Suggestions from "./Suggestions";
 import { YOUTUBE_SUGGESTIONS_API } from "../constants";
 import { Link } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
+import { addToCache } from "../utils/searchSlice";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -22,6 +23,8 @@ const Header = () => {
   // Concept of Debouncing - Why did I do this?
 
   // To not call api on every key press, instead we can get the difference between key press and if it is fast we can decline the api call, and hence it will optimize the performance
+  const getCachedData = useSelector((store) => store.cacheSearch);
+  console.log(getCachedData);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -34,9 +37,15 @@ const Header = () => {
   }, [searchQuery]);
 
   const getSuggestions = async () => {
+    // caching implementation using redux store
+    if (getCachedData[searchQuery]) {
+      return getCachedData[searchQuery];
+    }
+
     const res = await fetch(YOUTUBE_SUGGESTIONS_API + searchQuery);
     const data = await res.json();
     setSuggestions(data[1]);
+    dispatch(addToCache({ [searchQuery]: data[1] }));
   };
 
   return (
@@ -44,7 +53,9 @@ const Header = () => {
       <div className="grow-[0] text-2xl cursor-pointer" onClick={handleToggle}>
         <GiHamburgerMenu />
       </div>
-      <div className="logo grow-[1] ml-6">YOUTUBE</div>
+      <Link className="ml-6 grow-[0.6]" to="/">
+        <div className="logo">YOUTUBE</div>
+      </Link>
       <div className="searchBox grow-[3] items-center">
         <div className="flex">
           <input
