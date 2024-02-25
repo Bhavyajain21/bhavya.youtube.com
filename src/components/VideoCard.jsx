@@ -6,7 +6,7 @@ const VideoCard = ({ video }) => {
   const channelTitle = video.snippet.channelTitle;
   const views = video.statistics.viewCount;
   return (
-    <div className="w-[300px] shadow-lg rounded-lg p-2 m-2 cursor-pointer">
+    <div className="w-[15vw] h-[40vh] shadow-lg rounded-lg p-2 m-2 cursor-pointer overflow-scroll">
       <img src={thumbnailUrl} alt="" />
       <h1 className="font-bold">{title}</h1>
       <div className="mt-3">{channelTitle}</div>

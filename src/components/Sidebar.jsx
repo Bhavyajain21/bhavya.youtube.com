@@ -17,19 +17,19 @@ const Sidebar = () => {
         </div>
       </Link>
       <div className="subsriptions p-2">
-        <div className="font-bold">Subscriptions</div>
-        <ul className="cursor-pointer">
-          <li>Bhavya Jain</li>
-          <li>Swagger Sharma</li>
-          <li>Pepcoding</li>
+        <div className="font-bold pl-1">Subscriptions</div>
+        <ul className="cursor-pointer ">
+          <li className="p-1">Bhavya Jain</li>
+          <li className="p-1">Aman Dhattarwal</li>
+          <li className="p-1">Pepcoding</li>
         </ul>
       </div>
       <div className="Explore p-2">
-        <div className="font-bold">Explore </div>
+        <div className="font-bold pl-1">Explore </div>
         <ul className="cursor-pointer">
-          <li>Trending</li>
-          <li>Shopping</li>
-          <li>Music</li>
+          <li className="p-1">Trending</li>
+          <li className="p-1">Shopping</li>
+          <li className="p-1">Music</li>
         </ul>
       </div>
     </div>
