@@ -49,7 +49,7 @@ const Header = () => {
   };
 
   return (
-    <div className="header sticky top-0 bg-white flex p-4 items-center">
+    <div className="header sticky top-0 bg-white flex p-4 items-center z-10">
       <div className="grow-[0] text-2xl cursor-pointer" onClick={handleToggle}>
         <GiHamburgerMenu />
       </div>
