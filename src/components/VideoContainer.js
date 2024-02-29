@@ -8,30 +8,24 @@ const VideoContainer = () => {
   const [pageToken, setPageToken] = useState(null);
 
   useEffect(() => {
-    if (!pageToken && videos.length == 0) getVideos();
-    window.addEventListener("scroll", () => {
-      if (
-        Math.abs(
-          document.documentElement.scrollHeight -
-            document.documentElement.scrollTop -
-            document.documentElement.clientHeight
-        ) <= 1
-      ) {
-        getExtraVideos();
-      }
-    });
-    return () =>
-      window.removeEventListener("scroll", () => {
-        if (
-          Math.abs(
-            document.documentElement.scrollHeight -
-              document.documentElement.scrollTop -
-              document.documentElement.clientHeight
-          ) <= 1
-        ) {
-          getExtraVideos();
-        }
-      });
+    getVideos();
+  }, []);
+
+  const populateVideosOnBottom = () => {
+    if (
+      Math.abs(
+        document.documentElement.scrollHeight -
+          document.documentElement.scrollTop -
+          document.documentElement.clientHeight
+      ) <= 1
+    ) {
+      getExtraVideos();
+    }
+  };
+  useEffect(() => {
+    if (!pageToken) return;
+    window.addEventListener("scroll", populateVideosOnBottom);
+    return () => window.removeEventListener("scroll", populateVideosOnBottom);
   }, [pageToken]);
 
   const getExtraVideos = async () => {
@@ -56,15 +50,15 @@ const VideoContainer = () => {
     );
     const data = await res.json();
     setVideos(data.items);
-    // Warning: Encountered two children with the same key, `couuwMqFtb0`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
-    if (data.nextPageToken) setPageToken(data.nextPageToken);
+    setPageToken(data.nextPageToken);
   };
 
   return (
     <div className="flex flex-wrap w-[100%]">
+      {console.log(videos)}
       {videos.map((video) => (
-        <Link key={video.id} to={`/watch?v=` + video.id}>
-          <VideoCard video={video} />
+        <Link to={`/watch?v=` + video.id}>
+          <VideoCard key={video.id} video={video} />
         </Link>
       ))}
     </div>
