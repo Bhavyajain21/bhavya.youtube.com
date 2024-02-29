@@ -24,7 +24,6 @@ const Header = () => {
 
   // To not call api on every key press, instead we can get the difference between key press and if it is fast we can decline the api call, and hence it will optimize the performance
   const getCachedData = useSelector((store) => store.cacheSearch);
-  console.log(getCachedData);
 
   useEffect(() => {
     const timer = setTimeout(() => {
